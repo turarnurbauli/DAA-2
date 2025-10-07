@@ -56,6 +56,14 @@ GitHub Actions
 - Benchmark & Plots: builds jar, runs benchmark (scenarios incl. 'java'), generates PNG, uploads artifacts
 - Build Analysis PDF: converts `docs/analysis-report-template.md` to `docs/analysis-report.pdf`
 
+## Deliverables
+- Analysis Report (PDF): [docs/analysis-report.pdf](docs/analysis-report.pdf)
+- Benchmark CSV: [docs/performance-plots/maxheap_bench.csv](docs/performance-plots/maxheap_bench.csv)
+- Benchmark Plot: [docs/performance-plots/maxheap_bench.png](docs/performance-plots/maxheap_bench.png)
+
+## Pair Cross-Review
+Use the template at [docs/cross-review-summary.md](docs/cross-review-summary.md) to summarize findings across both algorithms.
+
 ## Complexity
 - Insert: O(log n) average/worst, Ω(1) best when at root
 - ExtractMax: O(log n)
