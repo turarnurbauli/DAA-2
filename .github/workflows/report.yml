@@ -1,0 +1,24 @@
+name: Build Analysis PDF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Pandoc and LaTeX minimal
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+      - name: Build PDF from template
+        run: |
+          pandoc docs/analysis-report-template.md -o docs/analysis-report.pdf --pdf-engine=xelatex
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-report
+          path: docs/analysis-report.pdf
+
+

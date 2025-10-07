@@ -1,0 +1,29 @@
+name: Benchmark & Plots
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build
+        run: mvn -B -q -DskipTests package
+      - name: Run benchmark (all scenarios)
+        run: java -jar target/assignment2-max-heap-0.1.0-all.jar all docs/performance-plots/maxheap_bench.csv "100,1000,10000,100000"
+      - name: Generate plot PNG
+        run: java -cp target/assignment2-max-heap-0.1.0-all.jar edu.assignment2.cli.PlotGenerator docs/performance-plots/maxheap_bench.csv docs/performance-plots/maxheap_bench.png
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            docs/performance-plots/maxheap_bench.csv
+            docs/performance-plots/maxheap_bench.png
+
+
